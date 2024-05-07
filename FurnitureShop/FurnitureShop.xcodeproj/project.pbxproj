@@ -59,8 +59,10 @@
 		ED44B85C2BE8E3E500B0B595 /* FurnitureShop */ = {
 			isa = PBXGroup;
 			children = (
-				ED44B88E2BEA4CA600B0B595 /* ViewModel */,
-				ED44B8872BE90C9E00B0B595 /* View */,
+				ED44B8942BEA659900B0B595 /* VerificationScreen */,
+				ED44B8872BE90C9E00B0B595 /* DetailsScreen */,
+				ED44B8922BEA654D00B0B595 /* AuthorizationScreen */,
+				ED44B8912BEA653900B0B595 /* StartedScreen */,
 				ED44B85D2BE8E3E500B0B595 /* FurnitureShopApp.swift */,
 				ED44B8612BE8E3E600B0B595 /* Assets.xcassets */,
 				ED44B8632BE8E3E600B0B595 /* Preview Content */,
@@ -76,15 +78,12 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		ED44B8872BE90C9E00B0B595 /* View */ = {
+		ED44B8872BE90C9E00B0B595 /* DetailsScreen */ = {
 			isa = PBXGroup;
 			children = (
-				ED44B85F2BE8E3E500B0B595 /* StartedView.swift */,
-				ED44B8882BE90F2D00B0B595 /* AuthorizationView.swift */,
-				ED44B88A2BE94D3300B0B595 /* VerificationView.swift */,
 				ED44B88C2BE96E1B00B0B595 /* DetailsView.swift */,
 			);
-			path = View;
+			path = DetailsScreen;
 			sourceTree = "<group>";
 		};
 		ED44B88E2BEA4CA600B0B595 /* ViewModel */ = {
@@ -93,6 +92,39 @@
 				ED44B88F2BEA4CBD00B0B595 /* AuthorizationViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ED44B8912BEA653900B0B595 /* StartedScreen */ = {
+			isa = PBXGroup;
+			children = (
+				ED44B85F2BE8E3E500B0B595 /* StartedView.swift */,
+			);
+			path = StartedScreen;
+			sourceTree = "<group>";
+		};
+		ED44B8922BEA654D00B0B595 /* AuthorizationScreen */ = {
+			isa = PBXGroup;
+			children = (
+				ED44B8932BEA657900B0B595 /* View */,
+				ED44B88E2BEA4CA600B0B595 /* ViewModel */,
+			);
+			path = AuthorizationScreen;
+			sourceTree = "<group>";
+		};
+		ED44B8932BEA657900B0B595 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED44B8882BE90F2D00B0B595 /* AuthorizationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ED44B8942BEA659900B0B595 /* VerificationScreen */ = {
+			isa = PBXGroup;
+			children = (
+				ED44B88A2BE94D3300B0B595 /* VerificationView.swift */,
+			);
+			path = VerificationScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

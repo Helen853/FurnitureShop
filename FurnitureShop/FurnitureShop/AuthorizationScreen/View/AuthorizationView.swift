@@ -25,6 +25,7 @@ struct AuthorizationView: View {
         static let alertTitle = "Для восстановления пароля свяжитесь с техподдержкой по номеру \n +7 (3235) 45-16-18"
         static let eyeOpen = "eye"
         static let eyeClose = "eye.slash"
+        static let phoneFormat = "+X (XXX) XXX-XX-XX"
     }
     
     @State var textNumber = ""
@@ -32,7 +33,8 @@ struct AuthorizationView: View {
     @State var showAlert = false
     @State var showPassword = false
     
-    @FocusState var nameIsFocus: Bool
+    @FocusState var numberIsFocus: Bool
+    @FocusState var passwordIsFocus: Bool
     
     @ObservedObject var viewModel = AuthorizationViewModel()
     
@@ -54,7 +56,9 @@ struct AuthorizationView: View {
                 Spacer()
             }
         }.navigationBarBackButtonHidden(true)
-        
+            .onTapGesture {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
     }
     
     private var gradientView: some View {
@@ -71,13 +75,11 @@ struct AuthorizationView: View {
         ZStack(alignment: .leading) {
             Image(Constants.graundImage).offset(x: -1)
             Image(Constants.graundLogin)
-            
             HStack(spacing: 74) {
                 setGradientText(title: Constants.loginText)
                 setGradientText(title: Constants.singUpText)
             }.frame(height: 55)
             .padding(40)
-                
         }
     }
     
@@ -90,7 +92,6 @@ struct AuthorizationView: View {
             }.alert(isPresented: $showAlert) {
                 Alert(title: Text(Constants.alertTitle))
             }
-            
             NavigationLink(destination: VerificationView()) {
                 makeText(text: Constants.checkTexxt)
             }
@@ -121,18 +122,31 @@ struct AuthorizationView: View {
             makeText(text: Constants.numberTitle)
             TextField(Constants.numberTextField, text: $textNumber)
                 .font(.system(size: 20))
-                .keyboardType(.namePhonePad)
+                .keyboardType(.phonePad)
                 .padding(.horizontal, 12)
+                .onChange(of: textNumber) { newValue in
+                    textNumber = viewModel.formatPhoneNumber(with: Constants.phoneFormat, phone: newValue)
+                    viewModel.checkNumber(count: textNumber.count)
+                    numberIsFocus = viewModel.showNumberKeyboard
+                    passwordIsFocus = viewModel.showPasswordKeyboard
+                }
+                .focused($numberIsFocus)
+    
             Divider()
             makeText(text: Constants.passwordText)
             HStack {
                 makeField()
                     .font(.system(size: 20))
                     .padding(.horizontal, 12)
+                    .focused($passwordIsFocus)
+                    .onChange(of: textPassword) { newValue in
+                        viewModel.checkPassword(count: newValue.count)
+                        passwordIsFocus = viewModel.showPasswordKeyboard
+                    }
                 Button {
-                    self.viewModel.showPassword.toggle()
+                    self.viewModel.updateField()
                 } label: {
-                    Image(systemName:  self.viewModel.showPassword ? Constants.eyeClose : Constants.eyeOpen)
+                    Image(systemName:  self.viewModel.showPassword ? Constants.eyeOpen : Constants.eyeClose)
                         .foregroundColor(.gray)
                 }
             }
@@ -161,9 +175,9 @@ struct AuthorizationView: View {
     private func makeField() -> some View {
         Group {
             if viewModel.showPassword {
-                SecureField(Constants.passwordTextField, text: $textPassword)
-            } else {
                 TextField(Constants.passwordTextField, text: $textPassword)
+            } else {
+                SecureField(Constants.passwordTextField, text: $textPassword)
             }
         }
     }
@@ -174,5 +188,3 @@ struct AuthorizationView_Previews: PreviewProvider {
         AuthorizationView()
     }
 }
-
-//https://s00.yaplakal.com/pics/pics_original/9/2/6/17827629.jpg

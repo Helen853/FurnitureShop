@@ -24,14 +24,18 @@ struct DetailsView: View {
         static let buttonTitle = "Buy now"
         static let startButtonColor = "startColorButton"
         static let endButtonColor = "endColorButton"
-        static let articleText = "Article: 283564"
-        static let descriptionText = "Description: A sofa in a modern style is furniture without lush ornate decor. It has a simple or even futuristic appearance and sleek design"
+        static let articleText = "Article:"
+        static let articleNumber = "283564"
+        static let descriptionText = " A sofa in a modern style is furniture without lush ornate decor. It has a simple or even futuristic appearance and sleek design"
+        static let description = "Description:"
         static let reviewText = "Review"
     }
     
     @State var text = ""
     @State var totalChar = 0
     @State var lastText = ""
+    
+    @Environment(\.presentationMode) var presentatin
     
     var body: some View {
         VStack {
@@ -71,11 +75,23 @@ struct DetailsView: View {
                 endPoint: .bottom
             ).cornerRadius(12, corners: [.topLeft, .topRight])
                 .ignoresSafeArea(.all)
-                
             VStack(spacing: 6) {
-                makeText(text: Constants.articleText)
+                HStack {
+                    makeText(text: Constants.articleText)
+                        .bold()
+                    makeText(text: Constants.articleNumber)
+                }
+                
                     .frame(width: 356, alignment: .leading)
-                makeText(text: Constants.descriptionText)
+                HStack(alignment: .top) {
+                    Text(Constants.description)
+                        .foregroundColor(.white)
+                        .font(.system(size: 16))
+                        .bold()
+                   + Text(Constants.descriptionText)
+                       .foregroundColor(.white)
+                       .font(.system(size: 16))
+                }
                 makeText(text: Constants.reviewText)
                     .bold()
                 inputReview
@@ -88,7 +104,7 @@ struct DetailsView: View {
     private var buyButton: some View {
         VStack {
             Button {
-                print("h")
+                self.presentatin.wrappedValue.dismiss()
             } label: {
                 gradientText
             }
@@ -126,14 +142,11 @@ struct DetailsView: View {
                     }
                 }
             Text("\(totalChar)/300")
-//            ProgressView("\(totalChar)/300", value: Double(totalChar), total: 300)
-//                .frame(width: 70)
-//                .foregroundColor(.white)
         }
     }
     
     private func makeText(text: String) -> some View {
-        Text(text)
+         Text(text)
             .foregroundColor(.white)
             .font(.system(size: 16))
     }

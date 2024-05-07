@@ -22,16 +22,17 @@ struct VerificationView: View {
         static let alertTitle = "Fill in from message"
         static let primaryButton = "Cancel"
         static let secondaryButton = "Ok"
+        static let number = ["8361"]
     }
     
     @Environment(\.presentationMode) var presentatin
     @State var showAlert = false
-    @State var textFirst = ""
-    @State var textSecond = ""
-    @State var textThird = ""
-    @State var textFourth = ""
+    @State var textFirst = "3"
+    @State var textSecond = "4"
+    @State var textThird = "1"
+    @State var textFourth = "8"
     
-    var number = ["3", "4", "5", "0"]
+    @State var number = ["3", "4", "5", "0"]
     var body: some View {
         
         VStack {
@@ -63,9 +64,6 @@ struct VerificationView: View {
                 makeTextFields(text: $textSecond)
                 makeTextFields(text: $textThird)
                 makeTextFields(text: $textFourth)
-//                ForEach(0..<number.count) {
-//                    setupCodeView(number: number[$0])
-//                }
             }
             
             VStack(spacing: 20) {
@@ -88,8 +86,14 @@ struct VerificationView: View {
                 }.alert(isPresented: $showAlert) {
                     Alert(
                         title: Text(Constants.alertTitle),
+                        message: Text("8903"),
                         primaryButton: .cancel(),
-                        secondaryButton: .default(Text(Constants.secondaryButton))
+                        secondaryButton: .default(Text(Constants.secondaryButton), action: {
+                            textFirst = "8"
+                            textSecond = "9"
+                            textThird = "0"
+                            textFourth = "3"
+                        })
                     )
                 }
             }
@@ -125,6 +129,8 @@ struct VerificationView: View {
             )
             .font(.system(size: 40))
             .multilineTextAlignment(.center)
+            .foregroundColor(.gray)
+            .keyboardType(.numberPad)
     }
     
     func setupCodeView(number: String) -> some View {

@@ -16,6 +16,7 @@ struct StartedView: View {
         static let endButtonColor = "endColorButton"
         static let bottomText = "Don't have an account?"
         static let bottomTitle = "Sing in here"
+        static let url = "https://s00.yaplakal.com/pics/pics_original/9/2/6/17827629.jpg"
         
     }
     
@@ -36,9 +37,10 @@ struct StartedView: View {
                             .font(.system(size: 40, weight: .bold))
                         Spacer(minLength: 40)
                         Image(Constants.imageName)
+                        asyncImage
                         Spacer(minLength: 116)
                         getStartedView
-                        Spacer(minLength: 121)
+                        Spacer()
                     }
                 }
             }
@@ -84,7 +86,37 @@ struct StartedView: View {
             }
         }
     }
+    
+    var asyncImage: some View {
+        AsyncImage(url: URL(string: Constants.url)) { phase in
+            switch phase {
+            case .empty:
+                Text("Пустая картинка")
+            case .success(let image):
+                image
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 100, height: 100)
+                    .clipShape(Circle())
+                    .overlay {
+                        Circle()
+                            .stroke(.white)
+                    }
+                    .shadow(radius: 20)
+            case .failure(_):
+                Text("Error")
+            @unknown default:
+                fatalError()
+            }
+        }
+    }
 }
+
+struct StartedView_Previews: PreviewProvider {
+    static var previews: some View {
+        StartedView()
+    }
+}
+
 
 
 
