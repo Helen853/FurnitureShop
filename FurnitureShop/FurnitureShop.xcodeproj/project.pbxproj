@@ -8,17 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		ED44B85E2BE8E3E500B0B595 /* FurnitureShopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B85D2BE8E3E500B0B595 /* FurnitureShopApp.swift */; };
-		ED44B8602BE8E3E500B0B595 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B85F2BE8E3E500B0B595 /* ContentView.swift */; };
+		ED44B8602BE8E3E500B0B595 /* StartedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B85F2BE8E3E500B0B595 /* StartedView.swift */; };
 		ED44B8622BE8E3E600B0B595 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED44B8612BE8E3E600B0B595 /* Assets.xcassets */; };
 		ED44B8652BE8E3E600B0B595 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED44B8642BE8E3E600B0B595 /* Preview Assets.xcassets */; };
+		ED44B8892BE90F2D00B0B595 /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B8882BE90F2D00B0B595 /* AuthorizationView.swift */; };
+		ED44B88B2BE94D3300B0B595 /* VerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B88A2BE94D3300B0B595 /* VerificationView.swift */; };
+		ED44B88D2BE96E1B00B0B595 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B88C2BE96E1B00B0B595 /* DetailsView.swift */; };
+		ED44B8902BEA4CBD00B0B595 /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B88F2BEA4CBD00B0B595 /* AuthorizationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		ED44B85A2BE8E3E500B0B595 /* FurnitureShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FurnitureShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED44B85D2BE8E3E500B0B595 /* FurnitureShopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurnitureShopApp.swift; sourceTree = "<group>"; };
-		ED44B85F2BE8E3E500B0B595 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		ED44B85F2BE8E3E500B0B595 /* StartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedView.swift; sourceTree = "<group>"; };
 		ED44B8612BE8E3E600B0B595 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED44B8642BE8E3E600B0B595 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		ED44B8882BE90F2D00B0B595 /* AuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
+		ED44B88A2BE94D3300B0B595 /* VerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationView.swift; sourceTree = "<group>"; };
+		ED44B88C2BE96E1B00B0B595 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		ED44B88F2BEA4CBD00B0B595 /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +59,9 @@
 		ED44B85C2BE8E3E500B0B595 /* FurnitureShop */ = {
 			isa = PBXGroup;
 			children = (
+				ED44B88E2BEA4CA600B0B595 /* ViewModel */,
+				ED44B8872BE90C9E00B0B595 /* View */,
 				ED44B85D2BE8E3E500B0B595 /* FurnitureShopApp.swift */,
-				ED44B85F2BE8E3E500B0B595 /* ContentView.swift */,
 				ED44B8612BE8E3E600B0B595 /* Assets.xcassets */,
 				ED44B8632BE8E3E600B0B595 /* Preview Content */,
 			);
@@ -65,6 +74,25 @@
 				ED44B8642BE8E3E600B0B595 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		ED44B8872BE90C9E00B0B595 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED44B85F2BE8E3E500B0B595 /* StartedView.swift */,
+				ED44B8882BE90F2D00B0B595 /* AuthorizationView.swift */,
+				ED44B88A2BE94D3300B0B595 /* VerificationView.swift */,
+				ED44B88C2BE96E1B00B0B595 /* DetailsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ED44B88E2BEA4CA600B0B595 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ED44B88F2BEA4CBD00B0B595 /* AuthorizationViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +165,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED44B8602BE8E3E500B0B595 /* ContentView.swift in Sources */,
+				ED44B8902BEA4CBD00B0B595 /* AuthorizationViewModel.swift in Sources */,
+				ED44B8602BE8E3E500B0B595 /* StartedView.swift in Sources */,
+				ED44B88D2BE96E1B00B0B595 /* DetailsView.swift in Sources */,
+				ED44B8892BE90F2D00B0B595 /* AuthorizationView.swift in Sources */,
 				ED44B85E2BE8E3E500B0B595 /* FurnitureShopApp.swift in Sources */,
+				ED44B88B2BE94D3300B0B595 /* VerificationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
