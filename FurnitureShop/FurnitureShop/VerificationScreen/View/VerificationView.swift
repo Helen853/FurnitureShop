@@ -22,83 +22,62 @@ struct VerificationView: View {
         static let alertTitle = "Fill in from message"
         static let primaryButton = "Cancel"
         static let secondaryButton = "Ok"
-        static let number = ["8361"]
     }
     
     @Environment(\.presentationMode) var presentatin
     @State var showAlert = false
-    @State var textFirst = "3"
-    @State var textSecond = "4"
-    @State var textThird = "1"
-    @State var textFourth = "8"
-    
     @State var number = ["3", "4", "5", "0"]
+    // @State var message = 
+    
+    @ObservedObject var viewModel = VerificationViewModel()
     var body: some View {
         
         VStack {
-            ZStack(alignment: .leading) {
-                LinearGradient(
-                    colors: [Color(Constants.startColor), Color(Constants.endColor)],
-                    startPoint: .leading,
-                    endPoint: .trailing
-                ).ignoresSafeArea(.all)
-
-                HStack {
-                    Button {
-                        self.presentatin.wrappedValue.dismiss()
-                    } label: {
-                        Image(Constants.backTitle)
-                    }.padding()
-                    Spacer(minLength: 90)
-                    Text(Constants.title)
-                        .foregroundColor(.white)
-                        .font(.system(size: 20, weight: .bold))
-                    Spacer()
-                }
-            }.frame(height: 60)
+            navigationView
+                .frame(height: 60)
             Image(Constants.message)
-            Text(Constants.codeText)
+            makeText(text: Constants.codeText)
             
             HStack {
-                makeTextFields(text: $textFirst)
-                makeTextFields(text: $textSecond)
-                makeTextFields(text: $textThird)
-                makeTextFields(text: $textFourth)
+                ForEach(0..<number.count) {
+                    makeTextFields(text: $number[$0])
+                }
             }
-            
+        
             VStack(spacing: 20) {
-                Text(Constants.checkTitle)
-                    .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(.gray)
+                makeText(text: Constants.checkTitle)
+                    .bold()
                 Text(Constants.messageText)
                     .foregroundColor(.gray)
                 continueButton
-                Text(Constants.receiveText)
-                    .font(.system(size: 20))
-                    .foregroundColor(.gray)
-                
-                Button {
-                    showAlert = true
-                } label: {
-                    Text(Constants.againText)
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(.gray)
-                }.alert(isPresented: $showAlert) {
-                    Alert(
-                        title: Text(Constants.alertTitle),
-                        message: Text("8903"),
-                        primaryButton: .cancel(),
-                        secondaryButton: .default(Text(Constants.secondaryButton), action: {
-                            textFirst = "8"
-                            textSecond = "9"
-                            textThird = "0"
-                            textFourth = "3"
-                        })
-                    )
-                }
+                makeText(text: Constants.receiveText)
+                sendCodeView
             }
                 Spacer()
         }.navigationBarBackButtonHidden(true)
+    }
+    
+    private var navigationView: some View {
+        ZStack(alignment: .leading) {
+            LinearGradient(
+                colors: [Color(Constants.startColor), Color(Constants.endColor)],
+                startPoint: .leading,
+                endPoint: .trailing
+            ).ignoresSafeArea(.all)
+
+            HStack {
+                Button {
+                    self.presentatin.wrappedValue.dismiss()
+                } label: {
+                    Image(Constants.backTitle)
+                }.padding()
+                Spacer(minLength: 90)
+                Text(Constants.title)
+                    .foregroundColor(.white)
+                    .font(.system(size: 20, weight: .bold))
+                Spacer()
+            }
+        }
     }
     
     private var continueButton: some View {
@@ -118,6 +97,25 @@ struct VerificationView: View {
             )
         )
         .cornerRadius(27)
+    }
+    
+    private var sendCodeView: some View {
+        Button {
+            showAlert = true
+            self.viewModel.returnNewCode()
+        } label: {
+            makeText(text: Constants.againText)
+                .bold()
+        }.alert(isPresented: $showAlert) {
+            Alert(
+                title: Text(Constants.alertTitle),
+                message: Text("\(viewModel.codeAll)"),
+                primaryButton: .cancel(),
+                secondaryButton: .default(Text(Constants.secondaryButton), action: {
+                    self.number = viewModel.code
+                })
+            )
+        }
     }
     
     func makeTextFields(text: Binding<String> ) -> some View {
@@ -144,6 +142,12 @@ struct VerificationView: View {
                 .font(.system(size: 40))
                 .foregroundColor(.gray)
         }
+    }
+    
+    func makeText(text: String) -> some View {
+        Text(text)
+            .font(.system(size: 20))
+            .foregroundColor(.gray)
     }
 }
 

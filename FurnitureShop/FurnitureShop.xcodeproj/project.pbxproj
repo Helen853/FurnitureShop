@@ -15,6 +15,7 @@
 		ED44B88B2BE94D3300B0B595 /* VerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B88A2BE94D3300B0B595 /* VerificationView.swift */; };
 		ED44B88D2BE96E1B00B0B595 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B88C2BE96E1B00B0B595 /* DetailsView.swift */; };
 		ED44B8902BEA4CBD00B0B595 /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B88F2BEA4CBD00B0B595 /* AuthorizationViewModel.swift */; };
+		ED44B8982BEAAAD600B0B595 /* VerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B8972BEAAAD600B0B595 /* VerificationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		ED44B88A2BE94D3300B0B595 /* VerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationView.swift; sourceTree = "<group>"; };
 		ED44B88C2BE96E1B00B0B595 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		ED44B88F2BEA4CBD00B0B595 /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
+		ED44B8972BEAAAD600B0B595 /* VerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 		ED44B85C2BE8E3E500B0B595 /* FurnitureShop */ = {
 			isa = PBXGroup;
 			children = (
+				ED44B8992BEAABC600B0B595 /* Extension */,
 				ED44B8942BEA659900B0B595 /* VerificationScreen */,
 				ED44B8872BE90C9E00B0B595 /* DetailsScreen */,
 				ED44B8922BEA654D00B0B595 /* AuthorizationScreen */,
@@ -122,9 +125,33 @@
 		ED44B8942BEA659900B0B595 /* VerificationScreen */ = {
 			isa = PBXGroup;
 			children = (
-				ED44B88A2BE94D3300B0B595 /* VerificationView.swift */,
+				ED44B8962BEAAAB400B0B595 /* ViewModel */,
+				ED44B8952BEAAAA900B0B595 /* View */,
 			);
 			path = VerificationScreen;
+			sourceTree = "<group>";
+		};
+		ED44B8952BEAAAA900B0B595 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED44B88A2BE94D3300B0B595 /* VerificationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ED44B8962BEAAAB400B0B595 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ED44B8972BEAAAD600B0B595 /* VerificationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ED44B8992BEAABC600B0B595 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,6 +228,7 @@
 				ED44B8602BE8E3E500B0B595 /* StartedView.swift in Sources */,
 				ED44B88D2BE96E1B00B0B595 /* DetailsView.swift in Sources */,
 				ED44B8892BE90F2D00B0B595 /* AuthorizationView.swift in Sources */,
+				ED44B8982BEAAAD600B0B595 /* VerificationViewModel.swift in Sources */,
 				ED44B85E2BE8E3E500B0B595 /* FurnitureShopApp.swift in Sources */,
 				ED44B88B2BE94D3300B0B595 /* VerificationView.swift in Sources */,
 			);

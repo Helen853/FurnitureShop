@@ -11,10 +11,12 @@ class AuthorizationViewModel: ObservableObject {
     @Published public var showPasswordKeyboard = false
     @Published public var showNumberKeyboard = true
     
+    /// Обновление филда пароля
     public func updateField() {
         showPassword.toggle()
     }
     
+    /// Проверка введенного номера
     public func checkNumber(count: Int) {
         if count == phoneFormat.count {
             showNumberKeyboard = false
@@ -22,12 +24,14 @@ class AuthorizationViewModel: ObservableObject {
         }
     }
     
+    /// Проверка введенного пароля
     public func checkPassword(count: Int) {
         if count == 15 {
             showPasswordKeyboard = false
         }
     }
     
+    /// Форматирование введенного номера
     public func formatPhoneNumber(with mask: String, phone: String) -> String {
         let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result = ""
