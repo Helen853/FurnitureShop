@@ -2,7 +2,6 @@
 //  VerificationView.swift
 //  FurnitureShop
 
-
 import SwiftUI
 
 struct VerificationView: View {
@@ -25,11 +24,15 @@ struct VerificationView: View {
     }
     
     @Environment(\.presentationMode) var presentatin
+    
     @State var showAlert = false
     @State var number = ["3", "4", "5", "0"]
-    // @State var message = 
+    @State var showProgress = false
     
     @ObservedObject var viewModel = VerificationViewModel()
+    
+    let numberLimit = 1
+    
     var body: some View {
         
         VStack {
@@ -37,13 +40,11 @@ struct VerificationView: View {
                 .frame(height: 60)
             Image(Constants.message)
             makeText(text: Constants.codeText)
-            
             HStack {
                 ForEach(0..<number.count) {
-                    makeTextFields(text: $number[$0])
+                    makeTextFields(text: $number[$0].max(numberLimit))
                 }
             }
-        
             VStack(spacing: 20) {
                 makeText(text: Constants.checkTitle)
                     .bold()
@@ -64,7 +65,6 @@ struct VerificationView: View {
                 startPoint: .leading,
                 endPoint: .trailing
             ).ignoresSafeArea(.all)
-
             HStack {
                 Button {
                     self.presentatin.wrappedValue.dismiss()
@@ -75,6 +75,7 @@ struct VerificationView: View {
                 Text(Constants.title)
                     .foregroundColor(.white)
                     .font(.system(size: 20, weight: .bold))
+                    .frame(width: 150, alignment: .leading)
                 Spacer()
             }
         }
@@ -82,7 +83,7 @@ struct VerificationView: View {
     
     private var continueButton: some View {
         Button {
-            print("")
+            showProgress.toggle()
         } label: {
             Text(Constants.buttonTitle)
                 .foregroundColor(.white)
@@ -119,7 +120,7 @@ struct VerificationView: View {
     }
     
     func makeTextFields(text: Binding<String> ) -> some View {
-        TextField("", text: text)
+        TextField("0", text: text)
             .frame(width: 60, height: 60)
             .overlay(
                 RoundedRectangle(cornerRadius: 6)
@@ -137,7 +138,6 @@ struct VerificationView: View {
                 .stroke(Color.gray, lineWidth: 2)
                 .frame(width: 60, height: 60)
                 .foregroundColor(Color.white)
-                
             Text(number)
                 .font(.system(size: 40))
                 .foregroundColor(.gray)

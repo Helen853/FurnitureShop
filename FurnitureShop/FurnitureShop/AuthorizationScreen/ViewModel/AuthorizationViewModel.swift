@@ -4,7 +4,7 @@
 
 import Foundation
 
-class AuthorizationViewModel: ObservableObject {
+final class AuthorizationViewModel: ObservableObject {
     private let phoneFormat = "+X (XXX) XXX-XX-XX"
     
     @Published public var showPassword = false

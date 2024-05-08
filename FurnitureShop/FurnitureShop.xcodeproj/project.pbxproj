@@ -16,6 +16,8 @@
 		ED44B88D2BE96E1B00B0B595 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B88C2BE96E1B00B0B595 /* DetailsView.swift */; };
 		ED44B8902BEA4CBD00B0B595 /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B88F2BEA4CBD00B0B595 /* AuthorizationViewModel.swift */; };
 		ED44B8982BEAAAD600B0B595 /* VerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B8972BEAAAD600B0B595 /* VerificationViewModel.swift */; };
+		ED44B89D2BEB40E000B0B595 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B89C2BEB40E000B0B595 /* View+Extension.swift */; };
+		ED44B89F2BEB498B00B0B595 /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B89E2BEB498B00B0B595 /* Binding+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		ED44B88C2BE96E1B00B0B595 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		ED44B88F2BEA4CBD00B0B595 /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		ED44B8972BEAAAD600B0B595 /* VerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationViewModel.swift; sourceTree = "<group>"; };
+		ED44B89C2BEB40E000B0B595 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		ED44B89E2BEB498B00B0B595 /* Binding+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +154,8 @@
 		ED44B8992BEAABC600B0B595 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				ED44B89C2BEB40E000B0B595 /* View+Extension.swift */,
+				ED44B89E2BEB498B00B0B595 /* Binding+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -226,7 +232,9 @@
 			files = (
 				ED44B8902BEA4CBD00B0B595 /* AuthorizationViewModel.swift in Sources */,
 				ED44B8602BE8E3E500B0B595 /* StartedView.swift in Sources */,
+				ED44B89D2BEB40E000B0B595 /* View+Extension.swift in Sources */,
 				ED44B88D2BE96E1B00B0B595 /* DetailsView.swift in Sources */,
+				ED44B89F2BEB498B00B0B595 /* Binding+Extension.swift in Sources */,
 				ED44B8892BE90F2D00B0B595 /* AuthorizationView.swift in Sources */,
 				ED44B8982BEAAAD600B0B595 /* VerificationViewModel.swift in Sources */,
 				ED44B85E2BE8E3E500B0B595 /* FurnitureShopApp.swift in Sources */,

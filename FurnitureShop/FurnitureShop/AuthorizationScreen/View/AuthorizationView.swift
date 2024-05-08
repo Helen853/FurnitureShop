@@ -175,9 +175,9 @@ struct AuthorizationView: View {
     private func makeField() -> some View {
         Group {
             if viewModel.showPassword {
-                TextField(Constants.passwordTextField, text: $textPassword)
+                TextField(Constants.passwordTextField, text: $textPassword.max(15))
             } else {
-                SecureField(Constants.passwordTextField, text: $textPassword)
+                SecureField(Constants.passwordTextField, text: $textPassword.max(15))
             }
         }
     }

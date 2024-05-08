@@ -36,7 +36,6 @@ struct StartedView: View {
                             .foregroundColor(.white)
                             .font(.system(size: 40, weight: .bold))
                         Spacer(minLength: 40)
-                        Image(Constants.imageName)
                         asyncImage
                         Spacer(minLength: 116)
                         getStartedView
@@ -91,11 +90,11 @@ struct StartedView: View {
         AsyncImage(url: URL(string: Constants.url)) { phase in
             switch phase {
             case .empty:
-                Text("Пустая картинка")
+                Image(Constants.imageName)
             case .success(let image):
                 image
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 100, height: 100)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 250, height: 250)
                     .clipShape(Circle())
                     .overlay {
                         Circle()
@@ -103,7 +102,7 @@ struct StartedView: View {
                     }
                     .shadow(radius: 20)
             case .failure(_):
-                Text("Error")
+                Image(Constants.imageName)
             @unknown default:
                 fatalError()
             }
@@ -116,23 +115,3 @@ struct StartedView_Previews: PreviewProvider {
         StartedView()
     }
 }
-
-
-
-
-extension View {
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape( RoundedCorner(radius: radius, corners: corners) )
-    }
-}
-
-struct RoundedCorner: Shape {
-    var radius: CGFloat = .infinity
-    var corners: UIRectCorner = .allCorners
-
-    func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        return Path(path.cgPath)
-    }
-}
-

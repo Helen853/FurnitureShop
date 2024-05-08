@@ -4,10 +4,12 @@
 
 import Foundation
 
+/// ViewModel для экрана верификации
 final class VerificationViewModel: ObservableObject {
     @Published var code = [String]()
     @Published var codeAll = String()
     
+    /// Возвращение рандомного кода
     func returnNewCode() {
         code.removeAll()
         codeAll.removeAll()
