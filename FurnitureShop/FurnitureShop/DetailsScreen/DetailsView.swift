@@ -128,7 +128,6 @@ struct DetailsView: View {
     private var inputReview: some View {
         HStack(alignment: .top) {
             TextEditor(text: $text)
-                .foregroundColor(.white)
                 .scrollContentBackground(.hidden)
                 .background(.clear)
                 .frame(width: 285, height: 177)
@@ -142,7 +141,7 @@ struct DetailsView: View {
                     }
                 }
             Text("\(totalChar)/300")
-        }
+        }.foregroundColor(.white)
     }
     
     private func makeText(text: String) -> some View {
