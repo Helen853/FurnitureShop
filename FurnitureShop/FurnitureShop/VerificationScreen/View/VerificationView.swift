@@ -85,9 +85,7 @@ struct VerificationView: View {
         Button {
             showProgress.toggle()
         } label: {
-            Text(Constants.buttonTitle)
-                .foregroundColor(.white)
-                .font(.system(size: 20, weight: .bold))
+            makeLabel()
         }
         .frame(width: 300, height: 55)
         .background(
@@ -119,7 +117,7 @@ struct VerificationView: View {
         }
     }
     
-    func makeTextFields(text: Binding<String> ) -> some View {
+    private func makeTextFields(text: Binding<String> ) -> some View {
         TextField("0", text: text)
             .frame(width: 60, height: 60)
             .overlay(
@@ -132,7 +130,7 @@ struct VerificationView: View {
             .keyboardType(.numberPad)
     }
     
-    func setupCodeView(number: String) -> some View {
+    private func setupCodeView(number: String) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.gray, lineWidth: 2)
@@ -144,10 +142,22 @@ struct VerificationView: View {
         }
     }
     
-    func makeText(text: String) -> some View {
+    private func makeText(text: String) -> some View {
         Text(text)
             .font(.system(size: 20))
             .foregroundColor(.gray)
+    }
+    
+    private func makeLabel() -> some View {
+        Group {
+            if showProgress {
+                ProgressView()
+            } else {
+                Text(Constants.buttonTitle)
+                    .foregroundColor(.white)
+                    .font(.system(size: 20, weight: .bold))
+            }
+        }
     }
 }
 
