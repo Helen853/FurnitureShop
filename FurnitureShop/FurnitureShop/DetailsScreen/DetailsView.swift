@@ -97,7 +97,6 @@ struct DetailsView: View {
                 inputReview
                 buyButton
             }
-            
         }
     }
     

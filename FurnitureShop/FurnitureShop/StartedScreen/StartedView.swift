@@ -59,7 +59,7 @@ struct StartedView: View {
     
     var getStartedView: some View {
         VStack {
-            NavigationLink(destination: DetailsView()) {
+            NavigationLink(destination: Tab()) {
                 gradientText
                 .background(.white)
                 .frame(width: 300, height: 55)
