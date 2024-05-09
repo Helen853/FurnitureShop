@@ -30,7 +30,6 @@ struct Tab: View {
                         .renderingMode(.template)
                         .foregroundColor(Color(.secondaryLabel))
                 }
-            
             FiltersView()
                 .tabItem {
                     Image(Constants.filtersItem)
@@ -47,6 +46,7 @@ struct Tab: View {
             
         }.accentColor(.green)
             .navigationBarBackButtonHidden(true)
+            .toolbar(.automatic, for: .tabBar)
     }
 }
 

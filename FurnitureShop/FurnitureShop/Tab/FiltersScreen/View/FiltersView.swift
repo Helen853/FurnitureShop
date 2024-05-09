@@ -21,16 +21,15 @@ struct FiltersView: View {
         static let colorText = "Color"
     }
     
+    let rows: [GridItem] = [ .init(.flexible())]
+    let columns: [GridItem] = [ .init(.flexible()), .init(.flexible()), .init(.flexible()), .init(.flexible()), .init(.flexible())]
+    
     @Environment(\.presentationMode) var presentatin
     
     @State private var progress: Double = 500
     @State private var currentPrice = 500
-    @State var colorText = "Color"
     
     @ObservedObject var viewModel = FiltersViewModel()
-    
-    let rows: [GridItem] = [ .init(.flexible())]
-    let columns: [GridItem] = [ .init(.flexible()), .init(.flexible()), .init(.flexible()), .init(.flexible()), .init(.flexible())]
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -41,17 +40,14 @@ struct FiltersView: View {
                     makeCategory(imageName: Constants.categories[image])
                 }
             }.frame(height: 90)
-                
             makeText(text: Constants.pricesText)
                 .padding()
             priceSlider
-            
             HStack {
                 makePriceText(text: Constants.minPrice)
                 Spacer()
                 makePriceText(text: "$\(currentPrice)")
             }.padding()
-            
             makeText(text: viewModel.colorText).padding()
             colorView
             Spacer()

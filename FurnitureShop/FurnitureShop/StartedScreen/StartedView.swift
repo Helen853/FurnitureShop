@@ -17,7 +17,6 @@ struct StartedView: View {
         static let bottomText = "Don't have an account?"
         static let bottomTitle = "Sing in here"
         static let url = "https://s00.yaplakal.com/pics/pics_original/9/2/6/17827629.jpg"
-        
     }
     
     var body: some View {
@@ -46,7 +45,7 @@ struct StartedView: View {
         }
     }
     
-    var gradientText: some View {
+   private var gradientText: some View {
         LinearGradient(
             colors: [Color(Constants.startButtonColor), Color(Constants.endButtonColor)],
             startPoint: .top,
@@ -57,7 +56,7 @@ struct StartedView: View {
         }
     }
     
-    var getStartedView: some View {
+    private var getStartedView: some View {
         VStack {
             NavigationLink(destination: Tab()) {
                 gradientText
@@ -86,7 +85,7 @@ struct StartedView: View {
         }
     }
     
-    var asyncImage: some View {
+    private var asyncImage: some View {
         AsyncImage(url: URL(string: Constants.url)) { phase in
             switch phase {
             case .empty:

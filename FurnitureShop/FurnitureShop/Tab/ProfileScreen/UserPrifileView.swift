@@ -31,7 +31,6 @@ struct UserPrifileView: View {
         static let accountText = "Accounts Details"
         static let purchasesText = "My purchases"
         static let settingsText = "Settings"
-        
         static let sityImageName = "sity"
         static let notificationImageName = "notification"
         static let accountImageName = "account"

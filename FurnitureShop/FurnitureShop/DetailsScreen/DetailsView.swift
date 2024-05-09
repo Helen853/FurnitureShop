@@ -4,11 +4,11 @@
 
 import SwiftUI
 
-struct DetailsView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailsView()
-    }
-}
+//struct DetailsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DetailsView()
+//    }
+//}
 
 struct DetailsView: View {
     
@@ -34,19 +34,20 @@ struct DetailsView: View {
     @State var text = ""
     @State var totalChar = 0
     @State var lastText = ""
+    var selectedFurniture: Furniture
     
     @Environment(\.presentationMode) var presentatin
     
     var body: some View {
         VStack {
             HStack {
-                Text(Constants.title)
+                Text(selectedFurniture.name)
                     .foregroundColor(.gray)
                     .font(.system(size: 20, weight: .bold))
                 Spacer()
                 Image(Constants.heartImage)
             }.padding()
-            Image(Constants.imageName)
+            Image(selectedFurniture.image)
             priceView.offset(x: 20)
             gradientView
         }.navigationBarBackButtonHidden(true)
@@ -60,7 +61,7 @@ struct DetailsView: View {
                     .fill(Color(Constants.priceColor))
                     .frame(width: 191, height: 44)
                     .cornerRadius(10, corners: [.topLeft, .bottomLeft])
-                Text(Constants.prict)
+                Text("Price: \(selectedFurniture.newPrice)$")
                     .foregroundColor(Color(Constants.colorName))
                     .font(.system(size: 20, weight: .bold))
             }
@@ -79,7 +80,7 @@ struct DetailsView: View {
                 HStack {
                     makeText(text: Constants.articleText)
                         .bold()
-                    makeText(text: Constants.articleNumber)
+                    makeText(text: selectedFurniture.article)
                 }
                 
                     .frame(width: 356, alignment: .leading)
@@ -88,10 +89,10 @@ struct DetailsView: View {
                         .foregroundColor(.white)
                         .font(.system(size: 16))
                         .bold()
-                   + Text(Constants.descriptionText)
+                    + Text(selectedFurniture.description)
                        .foregroundColor(.white)
                        .font(.system(size: 16))
-                }
+                }.padding(.leading)
                 makeText(text: Constants.reviewText)
                     .bold()
                 inputReview

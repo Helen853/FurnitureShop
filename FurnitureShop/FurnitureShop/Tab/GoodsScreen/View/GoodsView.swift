@@ -18,8 +18,9 @@ struct GoodsView: View {
         static let colorFont = "colorFont"
     }
     
-    @State var price = "   "
     @State var selectedCount = 0
+    @State private var showSheet = false
+    @State private var showSheets = [false, false, false, false, false, false]
     
     @ObservedObject var viewModel = GoodsViewModel()
     
@@ -29,8 +30,8 @@ struct GoodsView: View {
                 topView
                 priceView
                 ScrollView {
-                    ForEach(0..<viewModel.furniture.count) { item in
-                        makeSection(item: viewModel.furniture[item], index: item)
+                    ForEach(0..<viewModel.furniture.furniture.count) { item in
+                        makeSection(item: viewModel.furniture.furniture[item], index: item)
                     }
                 }
                 Spacer()
@@ -79,10 +80,17 @@ struct GoodsView: View {
     
     private func makeSection(item: Furniture, index: Int) -> some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 20)
-                .frame(width: 360, height: 150)
-                .shadow(radius: 4, y: 4)
-                .foregroundColor(Color(Constants.sectionColor))
+            Button {
+                showSheets[index].toggle()
+            } label: {
+                RoundedRectangle(cornerRadius: 20)
+                    .frame(width: 360, height: 150)
+                    .shadow(radius: 4, y: 4)
+                    .foregroundColor(Color(Constants.sectionColor))
+            }
+            .fullScreenCover(isPresented: $showSheets[index]) {
+                DetailsView(selectedFurniture: item)
+            }
             HStack {
                 Image(item.image)
                     .frame(width: 140, height: 140)
@@ -137,11 +145,5 @@ struct GoodsView: View {
                 .offset(x: 20)
             }
         }
-    }
-}
-
-struct GoodsView_Previews: PreviewProvider {
-    static var previews: some View {
-        GoodsView()
     }
 }

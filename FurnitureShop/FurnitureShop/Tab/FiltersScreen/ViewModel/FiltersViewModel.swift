@@ -13,10 +13,12 @@ final class FiltersViewModel: ObservableObject {
     
     @Published var colorText = "Color"
     
+    /// Установление актуального прайса
     func setCurrentPrice(sliderValue: Double) {
         currentPrice = sliderValue
     }
     
+    /// Установка текста над цветом
     func setColor(index: Int) {
         colorText = "Color - \(colors[index])"
     }
