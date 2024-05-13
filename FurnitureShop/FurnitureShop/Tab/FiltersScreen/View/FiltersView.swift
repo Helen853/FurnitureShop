@@ -5,6 +5,7 @@
 import SwiftUI
 
 struct FiltersView: View {
+    
     private enum Constants {
         static let title = "Filters"
         static let backTitle = "back"
@@ -21,15 +22,15 @@ struct FiltersView: View {
         static let colorText = "Color"
     }
     
-    let rows: [GridItem] = [ .init(.flexible())]
-    let columns: [GridItem] = [ .init(.flexible()), .init(.flexible()), .init(.flexible()), .init(.flexible()), .init(.flexible())]
+    private let rows: [GridItem] = [ .init(.flexible())]
+    private let columns: [GridItem] = [ .init(.flexible()), .init(.flexible()), .init(.flexible()), .init(.flexible()), .init(.flexible())]
     
-    @Environment(\.presentationMode) var presentatin
+    @Environment(\.presentationMode) private var presentatin
     
     @State private var progress: Double = 500
     @State private var currentPrice = 500
     
-    @ObservedObject var viewModel = FiltersViewModel()
+    @ObservedObject private var viewModel = FiltersViewModel()
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -109,7 +110,7 @@ struct FiltersView: View {
             .frame(height: 8)
     }
     
-    func makeCategory(imageName: String) -> some View {
+    private func makeCategory(imageName: String) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
                 .frame(width: 120, height: 80)
@@ -119,19 +120,19 @@ struct FiltersView: View {
         }
     }
     
-    func makeText(text: String) -> some View {
+    private func makeText(text: String) -> some View {
         Text(text)
             .foregroundColor(Color(Constants.colorFont))
             .font(.system(size: 24, weight: .bold))
     }
     
-    func makePriceText(text: String) -> some View {
+    private func makePriceText(text: String) -> some View {
         Text(text)
             .foregroundColor(Color(Constants.colorFont))
             .font(.system(size: 18))
     }
     
-    func makeColor(color: String, index: Int) -> some View {
+    private func makeColor(color: String, index: Int) -> some View {
         Button {
             viewModel.setColor(index: index)
         } label: {

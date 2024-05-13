@@ -21,6 +21,7 @@ struct VerificationView: View {
         static let alertTitle = "Fill in from message"
         static let primaryButton = "Cancel"
         static let secondaryButton = "Ok"
+        static let categoryColor = "categoryColor"
     }
     
     @Environment(\.presentationMode) var presentatin
@@ -34,28 +35,35 @@ struct VerificationView: View {
     let numberLimit = 1
     
     var body: some View {
-        
-        VStack {
-            navigationView
-                .frame(height: 60)
-            Image(Constants.message)
-            makeText(text: Constants.codeText)
-            HStack {
-                ForEach(0..<number.count) {
-                    makeTextFields(text: $number[$0].max(numberLimit))
+        ZStack {
+            VStack {
+                navigationView
+                    .frame(height: 60)
+                Image(Constants.message)
+                makeText(text: Constants.codeText)
+                HStack {
+                    ForEach(0..<number.count) {
+                        makeTextFields(text: $number[$0].max(numberLimit))
+                    }
                 }
-            }
-            VStack(spacing: 20) {
-                makeText(text: Constants.checkTitle)
-                    .bold()
-                Text(Constants.messageText)
-                    .foregroundColor(.gray)
-                continueButton
-                makeText(text: Constants.receiveText)
-                sendCodeView
-            }
+                VStack(spacing: 20) {
+                    makeText(text: Constants.checkTitle)
+                        .bold()
+                    Text(Constants.messageText)
+                        .foregroundColor(.gray)
+                    continueButton
+                    makeText(text: Constants.receiveText)
+                    sendCodeView
+                }
                 Spacer()
-        }.navigationBarBackButtonHidden(true)
+            }.blur(radius: showAlert ? 10 : 0)
+            if showAlert {
+                codeAlert
+                    .transition(.zoomAsymInOut)
+                    .zIndex(1)
+            }
+        }
+        .navigationBarBackButtonHidden(true)
     }
     
     private var navigationView: some View {
@@ -100,20 +108,43 @@ struct VerificationView: View {
     
     private var sendCodeView: some View {
         Button {
-            showAlert = true
+            withAnimation {
+                showAlert.toggle()
+            }
             self.viewModel.returnNewCode()
         } label: {
             makeText(text: Constants.againText)
                 .bold()
-        }.alert(isPresented: $showAlert) {
-            Alert(
-                title: Text(Constants.alertTitle),
-                message: Text("\(viewModel.codeAll)"),
-                primaryButton: .cancel(),
-                secondaryButton: .default(Text(Constants.secondaryButton), action: {
-                    self.number = viewModel.code
-                })
-            )
+        }
+    }
+    
+    private var codeAlert: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.white)
+                .frame(width: 250, height: 120)
+                .shadow(radius: 1)
+            VStack(spacing: 0) {
+                Text(Constants.alertTitle)
+                    .bold()
+                    .foregroundColor(.black)
+                Text("\(viewModel.codeAll)")
+                    .foregroundColor(.black)
+                HStack {
+                    Button {
+                        showAlert = false
+                    } label: {
+                        Text("Cancel")
+                    }
+                    Spacer()
+                    Button {
+                        self.number = viewModel.code
+                        showAlert = false
+                    } label: {
+                        Text(Constants.secondaryButton)
+                    }
+                }.padding(.horizontal, 120)
+            }
         }
     }
     
@@ -158,11 +189,5 @@ struct VerificationView: View {
                     .font(.system(size: 20, weight: .bold))
             }
         }
-    }
-}
-
-struct VerificationView_Previews: PreviewProvider {
-    static var previews: some View {
-        VerificationView()
     }
 }

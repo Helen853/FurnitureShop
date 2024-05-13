@@ -4,12 +4,6 @@
 
 import SwiftUI
 
-struct Tab_Previews: PreviewProvider {
-    static var previews: some View {
-        Tab()
-    }
-}
-
 struct Tab: View {
     
     private enum Constants {
@@ -46,7 +40,6 @@ struct Tab: View {
             
         }.accentColor(.green)
             .navigationBarBackButtonHidden(true)
-            .toolbar(.automatic, for: .tabBar)
     }
 }
 

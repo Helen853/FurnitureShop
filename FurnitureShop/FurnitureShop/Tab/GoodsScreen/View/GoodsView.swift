@@ -18,7 +18,7 @@ struct GoodsView: View {
         static let colorFont = "colorFont"
     }
     
-    @State var selectedCount = 0
+    @State private var selectedCount = 0
     @State private var showSheet = false
     @State private var showSheets = [false, false, false, false, false, false]
     
@@ -128,7 +128,6 @@ struct GoodsView: View {
                         .font(.system(size: 25))
                 }
                 .offset(x: -20)
-                
                 Text(String(viewModel.count[index]))
                     .bold()
                     .foregroundColor(Color(Constants.colorFont))

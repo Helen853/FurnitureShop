@@ -4,7 +4,9 @@
 
 import Foundation
 
+/// Хранилище данных о товаре
 struct StorageFurniture {
+    /// Массив с товарами
     var furniture: [Furniture]
     
     init() {

@@ -2,7 +2,7 @@
 //  GoodsViewModel.swift
 //  FurnitureShop
 
-import SwiftUI
+import Foundation
 
 /// ViewModel для экрана c категориями
 final class GoodsViewModel: ObservableObject {
@@ -16,7 +16,6 @@ final class GoodsViewModel: ObservableObject {
     /// - item: конкретная мебель
     func addPrice(price: Int, item: Furniture) {
         allPrice += price
-        
         for i in 0..<furniture.furniture.count-1 {
             if furniture.furniture[i] == item {
                 count[i] += 1
@@ -31,7 +30,6 @@ final class GoodsViewModel: ObservableObject {
     func removePrice(price: Int, item: Furniture) {
         guard allPrice >= 1 else { return }
         allPrice -= price
-        
         for i in 0..<furniture.furniture.count-1 {
             if furniture.furniture[i] == item {
                 guard count[i] >= 1 else { return }

@@ -26,12 +26,16 @@ struct AuthorizationView: View {
         static let eyeOpen = "eye"
         static let eyeClose = "eye.slash"
         static let phoneFormat = "+X (XXX) XXX-XX-XX"
+        static let errorCountNumber = "Номер должен содержать не менее 11 символов"
+        static let errorCountPassword = "Пароль должен содержать не менее 6 символов"
     }
     
     @State var textNumber = ""
     @State var textPassword = ""
     @State var showAlert = false
     @State var showPassword = false
+    @State var shakeNumberTextField = false
+    @State var shakePasswordTextField = false
     
     @FocusState var numberIsFocus: Bool
     @FocusState var passwordIsFocus: Bool
@@ -118,31 +122,19 @@ struct AuthorizationView: View {
     }
     
     private var textFields: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 15) {
             makeText(text: Constants.numberTitle)
-            TextField(Constants.numberTextField, text: $textNumber)
-                .font(.system(size: 20))
-                .keyboardType(.phonePad)
-                .padding(.horizontal, 12)
-                .onChange(of: textNumber) { newValue in
-                    textNumber = viewModel.formatPhoneNumber(with: Constants.phoneFormat, phone: newValue)
-                    viewModel.checkNumber(count: textNumber.count)
-                    numberIsFocus = viewModel.showNumberKeyboard
-                    passwordIsFocus = viewModel.showPasswordKeyboard
+            numberTextField
+            ZStack {
+                if shakeNumberTextField {
+                    makeErrorText(text: Constants.errorCountNumber)
+                } else {
+                    Divider()
                 }
-                .focused($numberIsFocus)
-    
-            Divider()
+            }
             makeText(text: Constants.passwordText)
             HStack {
-                makeField()
-                    .font(.system(size: 20))
-                    .padding(.horizontal, 12)
-                    .focused($passwordIsFocus)
-                    .onChange(of: textPassword) { newValue in
-                        viewModel.checkPassword(count: newValue.count)
-                        passwordIsFocus = viewModel.showPasswordKeyboard
-                    }
+                passwordField
                 Button {
                     self.viewModel.updateField()
                 } label: {
@@ -150,8 +142,69 @@ struct AuthorizationView: View {
                         .foregroundColor(.gray)
                 }
             }
-            Divider()
+            ZStack {
+                if shakePasswordTextField {
+                    makeErrorText(text: Constants.errorCountPassword)
+                } else {
+                    Divider()
+                }
+            }
         }
+    }
+    
+    private var numberTextField: some View {
+        TextField(Constants.numberTextField, text: $textNumber)
+            .font(.system(size: 20))
+            .keyboardType(.numberPad)
+            .padding(.horizontal, 12)
+            .onChange(of: textNumber) { newValue in
+                textNumber = viewModel.formatPhoneNumber(with: Constants.phoneFormat, phone: newValue)
+                viewModel.checkNumber(count: textNumber.count)
+                numberIsFocus = viewModel.showNumberKeyboard
+                passwordIsFocus = viewModel.showPasswordKeyboard
+            }
+            .focused($numberIsFocus)
+            .onSubmit({
+                viewModel.checkMinCountNumber(count: textNumber.count)
+            })
+            .border(shakeNumberTextField ? .red : .clear)
+            .offset(x: shakeNumberTextField ? 5 : 0)
+            .onChange(of: viewModel.showAnimationNumber) { _ in
+                withAnimation(Animation.default.repeatCount(7).speed(5)) {
+                    shakeNumberTextField = viewModel.showAnimationNumber
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    withAnimation(.linear(duration: 1).delay(0.3)) {
+                        self.shakeNumberTextField = false
+                    }
+                }
+            }
+    }
+    
+    private var passwordField: some View {
+        makeField()
+            .font(.system(size: 20))
+            .padding(.horizontal, 12)
+            .focused($passwordIsFocus)
+            .onChange(of: textPassword) { newValue in
+                viewModel.checkPassword(count: newValue.count)
+                passwordIsFocus = viewModel.showPasswordKeyboard
+            }
+            .onSubmit({
+                viewModel.checkMinCountPassword(count: textPassword.count)
+            })
+            .border( shakePasswordTextField ? .red : .clear)
+            .offset(x: shakePasswordTextField ? 10 : 0)
+            .onChange(of: viewModel.showAnimationPassword) { _ in
+                withAnimation(Animation.default.repeatCount(7).speed(5)) {
+                    shakePasswordTextField = viewModel.showAnimationPassword
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    withAnimation(.linear(duration: 1).delay(0.3)) {
+                        self.shakePasswordTextField = false
+                    }
+                }
+            }
     }
     
     private func setGradientText(title: String) -> some View {
@@ -170,6 +223,14 @@ struct AuthorizationView: View {
         Text(text)
             .font(.system(size: 20, weight: .bold))
             .foregroundColor(.gray)
+    }
+    
+    private func makeErrorText(text: String) -> some View {
+        Text(text)
+            .font(.system(size: 10))
+            .foregroundColor(.red)
+            .lineLimit(2)
+        
     }
     
     private func makeField() -> some View {

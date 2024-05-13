@@ -4,19 +4,6 @@
 
 import SwiftUI
 
-struct Chapter: Identifiable {
-    var id = UUID()
-    let image: String
-    let title: String
-}
-
-struct ChapterBadge: Identifiable {
-    var id = UUID()
-    let image: String
-    let title: String
-    let nitifications: String
-}
-
 struct UserPrifileView: View {
     
     private enum Constants {
@@ -38,13 +25,13 @@ struct UserPrifileView: View {
         static let settingsImageName = "settings"
     }
     
-    var chapters: [Chapter] = [
+    private let chapters: [Chapter] = [
         .init(image: Constants.accountImageName, title: Constants.accountText),
         .init(image: Constants.purchasesImageName, title: Constants.purchasesText),
         .init(image: Constants.settingsImageName, title: Constants.settingsText)
     ]
     
-    var chaptersBadge: [ChapterBadge] = [
+    private let chaptersBadge: [ChapterBadge] = [
         .init(image: Constants.sityImageName, title: Constants.sityText, nitifications: "2"),
         .init(image: Constants.notificationImageName, title: Constants.notificationText, nitifications: "3")
     ]
@@ -87,7 +74,6 @@ struct UserPrifileView: View {
             }.background(.white)
                 .navigationBarBackButtonHidden(true)
         }
-        
     }
     
     private var gradientView: some View {
@@ -126,10 +112,3 @@ struct UserPrifileView: View {
         }
     }
 }
-
-struct UserPrifileView_Previews: PreviewProvider {
-    static var previews: some View {
-        UserPrifileView()
-    }
-}
-

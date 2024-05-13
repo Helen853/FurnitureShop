@@ -4,12 +4,6 @@
 
 import SwiftUI
 
-//struct DetailsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DetailsView()
-//    }
-//}
-
 struct DetailsView: View {
     
     private enum Constants {
@@ -31,10 +25,13 @@ struct DetailsView: View {
         static let reviewText = "Review"
     }
     
-    @State var text = ""
-    @State var totalChar = 0
-    @State var lastText = ""
     var selectedFurniture: Furniture
+    
+    @State private var text = ""
+    @State private var totalChar = 0
+    @State private var lastText = ""
+    
+    @GestureState var scale = 1.0
     
     @Environment(\.presentationMode) var presentatin
     
@@ -48,6 +45,13 @@ struct DetailsView: View {
                 Image(Constants.heartImage)
             }.padding()
             Image(selectedFurniture.image)
+                .scaleEffect(scale)
+                .gesture(
+                    MagnificationGesture()
+                        .updating($scale) { value, gestureState, transaction in
+                            gestureState = value.magnitudeSquared
+                        }
+                )
             priceView.offset(x: 20)
             gradientView
         }.navigationBarBackButtonHidden(true)
